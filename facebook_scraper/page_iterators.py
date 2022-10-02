@@ -274,14 +274,13 @@ class SearchPageParser(PageParser):
     cursor_regex_2 = re.compile(r'href":"[^"]+(/search/[^"]+)"')
     
     def get_page(self) -> Page:
-          return super()._get_page('article', 'article')
+          return super()._get_page('div[data-module-role="TOP_PUBLIC_POSTS"]', 'article')
     
     def get_next_page(self) -> Optional[URL]:
         if self.cursor_blob is not None:
             match = self.cursor_regex.search(self.cursor_blob)
             if match:
                 return match.groups()[0]
-
             match = self.cursor_regex_2.search(self.cursor_blob)
             if match:
                 value = match.groups()[0]
